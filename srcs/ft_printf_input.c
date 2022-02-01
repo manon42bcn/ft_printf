@@ -19,7 +19,7 @@ int	ft_is_token(int c)
 
 int	ft_is_flag(int c)
 {
-	return (c == '#' || c = '+' || c = ' ');
+	return (c == '#' || c == '+' || c == ' ');
 }
 
 int	ft_is_int(int c)

@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-int	ft_process_hexa(va_list arg, t_token *token)
+int	ft_process_hexa(va_list args, t_token *token)
 {
 	int	rst;
 
@@ -43,8 +43,8 @@ int	ft_process_hexa(va_list arg, t_token *token)
 
 int	ft_print_hexa(unsigned long nbr, char *base, t_token *token)
 {
-	int	base_num;
-	int	fill;
+	unsigned long	base_num;
+	int				fill;
 
 	base_num = 16;
 	fill = 0;

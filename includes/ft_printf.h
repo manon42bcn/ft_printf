@@ -13,20 +13,24 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <unistd.h>
+# include <stdlib.h>
+# include <stdarg.h>
 
-typedef struct s_tokens
+typedef struct s_token
 {
 	char	token;
 	int		width;
 	char	fill_char;
+	int		format;
 
-	width = -1;
-}	t_tokens;
+}	t_token;
 
+/* MAIN */
+int	ft_get_token(char *input, int *i);
 /* INPUTS */
 int	ft_is_token(int c);
 int	ft_is_flag(int c);
-int	ft_is_int(int c)
+int	ft_is_int(int c);
 /* HEXA */
 int ft_process_hexa(va_list arg, t_token *token);
 int ft_print_hexa(unsigned long nbr, char *base, t_token *token);

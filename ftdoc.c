@@ -149,15 +149,7 @@ char	*ft_str_ins(char *src, char *ins, char c)
 void	types()
 {
 	/*
-		c = char put char
-		s = string put str
-		i = entero itoa
-		p = puntero a imprimir hexadecimal putnumberbase
-		x = hexadecimal en minusculas put hexa
-		X = hexadecimal en mayusculas put hexa mayusculas
-		d = imprime numero decimal put number dec
-		u = numero decimal 
-		% = imprimir % literal impresion literal.
+			
 	
 }
 int test(char *input)

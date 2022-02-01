@@ -12,7 +12,7 @@
 
 NAME		 = libftprintf.a
 SRCS_PATH	 = srcs/
-SRCS		 = ft_printf.c ft_printf_input.c
+SRCS		 = $(SRCS_PATH)ft_printf.c $(SRCS_PATH)ft_printf_input.c $(SRCS_PATH)ft_token_hexa.c $(SRCS_PATH)ft_token_numbers.c
 OBJS		 = $(SRCS:.c=.o)
 BONUS		 =	ft_printf.c
 BONUS_OBJS	 = $(BONUS:.c=.o)

@@ -10,11 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/ft_printf.h"
+
 int	ft_print_int(int nbr, t_token *token)
 {
 	if (nbr > 10)
-		return (ft_print_int(nbr / base_num, token)
-			+ write(1, &base[nbr % base_num], 1));
+		return (ft_print_int(nbr / 10, token)
+			+ write(1, (nbr % 10 + 48), 1));
 	else
 		return (write(1, &base[nbr], 1));
 }

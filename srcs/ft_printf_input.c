@@ -10,23 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-	c = char put char
-		s = string put str
-		i = entero itoa
-		p = puntero a imprimir hexadecimal putnumberbase
-		x = hexadecimal en minusculas put hexa
-		X = hexadecimal en mayusculas put hexa mayusculas
-		d = imprime numero decimal put number dec
-		u = numero decimal 
-		% = imprimir % literal impresion literal.
-*/
-
 int	ft_is_token(int c)
 {
-	return (c == 'c' || c == 's' || c == 'i' 
-			|| c == 'p' || c == 'x' || c == 'X' 
-			|| c == 'd' || c == 'u' || c == '%');
+	return (c == 'c' || c == 's' || c == 'i'
+		|| c == 'p' || c == 'x' || c == 'X'
+		|| c == 'd' || c == 'u' || c == '%');
 }
 
 int	ft_is_flag(int c)
@@ -40,12 +28,4 @@ int	ft_is_int(int c)
 		return (c - 48);
 	else
 		return (-1);
-}
-
-int	ft_get_token(char *input, va_list arg, int *i)
-{
-	int	k;
-
-	k = 0;
-	
 }

@@ -16,6 +16,33 @@
 #include <stdlib.h>
 #include "libft/libft.h"
 
+/*
+	Conversiones -0 flag de min width
+	flags de conversiones # ' ' + 
+		0 : justifica con ceros un numero %03i imprime 12 como 012 (revisar hexa piscina)
+		mw: expresado con un numero. se rellena la cadena con espacios a la izquierda.
+		+ : imprime el signo de un numero.
+		# : Formato alternativo. Para reales se dejan ceros al final y se imprime siempre la coma. 
+			Para números que no están en base 10, se añade un prefijo denotando la base
+			  -      Left justify.
+			   0  	  Field is padded with 0's instead of blanks.
+			   +	  Sign of number always O/P.
+			   blank  Positive values begin with a blank.
+			   # 	  Various uses:
+				  %#o (Octal) 0 prefix inserted.
+				  %#x (Hex)   0x prefix added to non-zero values.
+				  %#X (Hex)   0X prefix added to non-zero values.
+				  %#e         Always show the decimal point.
+				  %#E         Always show the decimal point.
+				  %#f         Always show the decimal point.
+				  %#g         Always show the decimal point trailing 
+				  	      zeros not removed.
+				  %#G         Always show the decimal point trailing
+					      zeros not removed.
+	  ' ' : Use un espacio en blanco para antefir el valor de salida si está firmado y es positivo.
+	  		El espacio en blanco se omite si aparecen las marcas blank y +. (añade un espacio antes...)
+*/
+
 void	ft_print_pointer(unsigned long nbr, char *base, int base_num)
 {
 	if (nbr >= base_num)
@@ -126,10 +153,10 @@ void	types()
 		s = string put str
 		i = entero itoa
 		p = puntero a imprimir hexadecimal putnumberbase
-		d = imprime numero decimal put number dec
-		u = numero decimal 
 		x = hexadecimal en minusculas put hexa
 		X = hexadecimal en mayusculas put hexa mayusculas
+		d = imprime numero decimal put number dec
+		u = numero decimal 
 		% = imprimir % literal impresion literal.
 	
 }

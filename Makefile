@@ -11,22 +11,24 @@
 # **************************************************************************** #
 
 NAME		 = libftprintf.a
-SRCS_PATH	 = srcs/
-SRCS		 = $(SRCS_PATH)ft_printf.c $(SRCS_PATH)ft_printf_input.c $(SRCS_PATH)ft_token_hexa.c $(SRCS_PATH)ft_token_numbers.c
-OBJS		 = $(SRCS:.c=.o)
+SRCS		 = srcs/ft_printf.c srcs/ft_printf_input.c srcs/ft_printf_utils.c srcs/ft_token_hexa.c \
+			   srcs/ft_token_numbers.c srcs/ft_token_strings.c
+OBJS		 = ft_printf.o ft_printf_input.o ft_printf_utils.o ft_token_hexa.o \
+			   ft_token_numbers.o ft_token_strings.o
 BONUS		 =	ft_printf.c
 BONUS_OBJS	 = $(BONUS:.c=.o)
 CC			 = gcc
 RM			 = rm -f
 CFLAGS		 = -Wall -Wextra -Werror -c
-INCLUDES	 = -I.includes/
-NAME 		 = libftprintf.a
+INCLUDES	 = -I.includes/ft_printf.h
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC)$(CFLAGS)$(INCLUDES)$(SRCS)
 	ar rcs $(NAME) $(OBJS)
+
+$(OBJS):
+	gcc -Wall -Wextra -Werror -c $(INCLUDES) $(SRCS)
 
 clean:
 	$(RM) $(OBJS) $(BONUS_OBJS)

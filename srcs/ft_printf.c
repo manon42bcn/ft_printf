@@ -110,7 +110,7 @@ int	ft_input_to_tokens(const char *input, va_list args, int *i)
 	token = ft_start_token();
 	k = ft_get_tokens(input, token);
 	*(i) = *(i) + k;
-	if (token->width != 0 && token->fill_c == 0)
+	if ((token->width != 0 && token->fill_c == 0) || token->point == 1)
 		token->fill_c = ' ';
 	if (token->token == 'p')
 		token->hash = 1;

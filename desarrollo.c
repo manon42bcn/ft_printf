@@ -32,9 +32,7 @@ int main(void)
 
 	char *c;
 
-  	ft_printf("[%-1d]", 0);
-	ft_printf("\n");
-	printf("[%-1d]", 0);
+   printf("[%05.0i]", 5);
 	 //write(1, c, 5);
 	//ft_printf("%c - %s - %p %d - %i - %u - %x %X %%", 'a', "test", (void *)0xdeadc0de, 20, -20, -1, -1, 200000000);
 	

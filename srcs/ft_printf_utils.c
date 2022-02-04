@@ -27,6 +27,7 @@ t_token	*ft_start_token(void)
 	rst->left = 0;
 	rst->point = 0;
 	rst->precision = 0;
+	rst->space = 0;
 	return (rst);
 }
 
@@ -37,8 +38,11 @@ int	ft_fill_left(t_token *token)
 	rst = 0;
 	if (token->left == 1 && token->width > 0)
 	{
-		while (--token->width >= 0)
+		while (token->width > 0)
+		{
 			rst += write(1, " ", 1);
+			token->width--;
+		}
 	}
 	return (rst);
 }
@@ -51,14 +55,4 @@ size_t	ft_strlen(const char *s)
 	while (s[i])
 		i++;
 	return (i);
-}
-
-unsigned int	ft_power_ten(int n)
-{
-	unsigned int	rst;
-
-	rst = 1;
-	while (n-- > 0)
-		rst = rst * 10;
-	return (rst);
 }

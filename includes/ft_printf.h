@@ -26,6 +26,7 @@ typedef struct s_token
 	int	left;
 	int	point;
 	int	precision;
+	int	space;
 
 }	t_token;
 
@@ -42,7 +43,7 @@ int				ft_is_flag(int c);
 int				ft_is_int(int c);
 int				ft_flag_with_values(int c);
 int				ft_process_hexa(va_list arg, t_token *token);
-int				ft_hexa_left(t_token *token);
+int				ft_print_hexa_cases(unsigned long nbr, char *base, t_token *token);
 int				ft_print_format_hexa(t_token *token, char *base, char num);
 int				ft_print_hexa(unsigned long nbr, char *base, t_token *token);
 int				ft_process_strings(va_list args, t_token *token);
@@ -50,7 +51,7 @@ int				ft_print_strings(char *str, t_token *token);
 int				ft_print_chars(int c, t_token *token);
 int				ft_process_numbers(va_list args, t_token *token);
 int				ft_print_int(long int nbr, t_token *token);
+int				ft_print_number_cases(long int nbr, t_token *token);
 int				ft_print_format_number(t_token *token, char num);
-int				ft_print_double(double nbr, t_token *token);
-unsigned int	ft_power_ten(int n);
+
 #endif

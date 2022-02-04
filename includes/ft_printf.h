@@ -26,7 +26,6 @@ typedef struct s_token
 	int	left;
 	int	point;
 	int	precision;
-	int	percent;
 
 }	t_token;
 

@@ -23,10 +23,12 @@ int	ft_printf(const char *src, ...)
 	va_start(args, src);
 	while (src[i])
 	{
-		if (src[i] == '%' && src[i + 1] && src[i + 1] != '%')
-			rst += ft_input_to_tokens(&src[i + 1], args, &i);
-		if (src[i] == '%' && src[i + 1] && src[i + 1] == '%')
+		if (src[i] == '%' && src[i + 1])
+		{
 			i++;
+			rst += ft_input_to_tokens(&src[i], args, &i);
+			continue ;
+		}
 		if (!src[i])
 			break ;
 		rst += write(1, &src[i], 1);
@@ -46,11 +48,19 @@ int	ft_get_token_sizes(const char *input, t_token *token)
 		while (input[++i] && ft_is_int(input[i]) != -1)
 			token->precision = (token->precision * 10) + (input[i] - 48);
 	}
-	if ((input[0] == '-' || input[0] == ' ' || input[0] == '0')
+	else if ((input[0] == '-' || input[0] == ' ' || input[0] == '0')
 		&& (input[1] && ft_is_int(input[1]) != -1))
 	{
 		while (input[++i] && ft_is_int(input[i]) != -1)
 			token->width = (token->width * 10) + (input[i] - 48);
+	}
+	else if (ft_is_int(input[0]) != -1)
+	{
+		while (input[i] && ft_is_int(input[i]) != -1)
+		{
+			token->width = (token->width * 10) + (input[i] - 48);
+			i++;
+		}
 	}
 	if (i > 0)
 		i--;
@@ -92,13 +102,18 @@ int	ft_input_to_tokens(const char *input, va_list args, int *i)
 	int		k;
 	int		rst;
 
-	if (ft_is_flag(input[0]) != 1 && ft_is_token(input[0]) != 1)
-		return (0);
+	if (input[0] == '%')
+	{
+		*(i) = *(i) + 1;
+		return (write(1, "%", 1));
+	}
 	token = ft_start_token();
 	k = ft_get_tokens(input, token);
-	*(i) = *(i) + k + 1;
-	if (token->point == 0 && token->precision == 0)
-		token->precision = 6;
+	*(i) = *(i) + k;
+	if (token->width != 0 && token->fill_c == 0)
+		token->fill_c = ' ';
+	if (token->token == 'p')
+		token->hash = 1;
 	rst = ft_process_tokens(token, args);
 	free(token);
 	return (rst);

@@ -46,16 +46,18 @@ int	ft_print_format_hexa(t_token *token, char *base, char num)
 	int	rst;
 
 	rst = 0;
-	if (token->token == 'p' || token->hash == 1)
-	{
+	if (token->hash == 1)
 		token->width = token->width - 2;
-		if (token->fill_c == '0' || token->width < 0 || token->left == 0)
-			rst += write(1, &base[16], 1) + write(1, &base[17], 1);
-		while (--token->width > 0 && token->left == 0)
-			rst += write(1, &token->fill_c, 1);
-		if (token->fill_c == ' ' && token->left == 0)
-			rst += write(1, &base[16], 1) + write(1, &base[17], 1);
-	}
+	if (token->point == 1 && token->precision > 0)
+		token->width = token->width - token->precision;
+	if (token->hash == 1 && token->width > 0 && token->fill_c == '0')
+		rst += write(1, &base[16], 1) + write(1, &base[17], 1);
+	while (token->width-- > 1 && token->left == 0)
+		rst += write(1, &token->fill_c, 1);
+	if (token->hash == 1 && (token->left == 1 || token->width < 1))
+		rst += write(1, &base[16], 1) + write(1, &base[17], 1);
+	while (--token->precision > 0)
+		rst += write(1, "0", 1);
 	rst += write(1, &num, 1);
 	return (rst);
 }
@@ -64,9 +66,14 @@ int	ft_print_hexa(unsigned long nbr, char *base, t_token *token)
 {
 	unsigned long	base_num;
 
+	if (nbr == 0 && token->point == 1 && token->precision == 0)
+		return (0);
 	base_num = 16;
+	if (nbr == 0 && token->token != 'p' && token->point == 0)
+		return (write(1, "0", 1));
 	if (nbr >= base_num)
 	{
+		token->precision = token->precision - 1;
 		token->width = token->width - 1;
 		return (ft_print_hexa(nbr / base_num, base, token)
 			+ write(1, &base[nbr % base_num], 1));

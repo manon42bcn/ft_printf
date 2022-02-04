@@ -25,7 +25,8 @@ t_token	*ft_start_token(void)
 	rst->hash = 0;
 	rst->sign = 0;
 	rst->left = 0;
-	rst->precision = 6;
+	rst->point = 0;
+	rst->precision = 0;
 	return (rst);
 }
 
@@ -36,7 +37,7 @@ int	ft_fill_left(t_token *token)
 	rst = 0;
 	if (token->left == 1 && token->width > 0)
 	{
-		while (token->width-- > 0)
+		while (--token->width >= 0)
 			rst += write(1, " ", 1);
 	}
 	return (rst);

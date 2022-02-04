@@ -27,13 +27,15 @@ int	ft_print_int_test(float nbr)
 */
 int main(void)
 {
-	char *ptr;
+	char ptr;
 	int test;
 
-	test = ft_printf(" %% :");
-	printf("\n%i rst\n", test);
-	printf("\n=====\n");
-	test = printf(" %% :");
-	printf("\n%i\n", test);
+	char *c;
+
+  	ft_printf("[%-1d]", 0);
+	ft_printf("\n");
+	printf("[%-1d]", 0);
+	 //write(1, c, 5);
+	//ft_printf("%c - %s - %p %d - %i - %u - %x %X %%", 'a', "test", (void *)0xdeadc0de, 20, -20, -1, -1, 200000000);
 	
 }

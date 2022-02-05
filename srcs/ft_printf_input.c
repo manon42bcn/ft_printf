@@ -29,6 +29,11 @@ int	ft_flag_with_values(int c)
 	return (c == ' ' || c == '-' || c == '.' || (c >= '0' && c <= '9'));
 }
 
+int	ft_is_width_flag(int c)
+{
+	return (c == ' ' || c == '0' || c == '-');
+}
+
 int	ft_is_int(int c)
 {
 	if (c >= 48 && c <= 57)

@@ -12,9 +12,9 @@
 
 NAME		 = libftprintf.a
 SRCS		 = srcs/ft_printf.c srcs/ft_printf_input.c srcs/ft_printf_utils.c srcs/ft_token_hexa.c \
-			   srcs/ft_token_numbers.c srcs/ft_token_strings.c
+			   srcs/ft_token_numbers.c srcs/ft_token_strings.c srcs/ft_token_process.c
 OBJS		 = ft_printf.o ft_printf_input.o ft_printf_utils.o ft_token_hexa.o \
-			   ft_token_numbers.o ft_token_strings.o
+			   ft_token_numbers.o ft_token_strings.o ft_token_process.o
 BONUS		 =	ft_printf.c
 BONUS_OBJS	 = $(BONUS:.c=.o)
 CC			 = gcc

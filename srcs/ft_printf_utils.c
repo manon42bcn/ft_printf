@@ -56,3 +56,27 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
+
+int	ft_width_fill(t_token *token, int l_r)
+{
+	int	rst;
+
+	rst = 0;
+	if (l_r == 0)
+	{
+		while (token->left == 0 && token->width > 0)
+		{
+			rst += write(1, &token->fill_c, 1);
+			token->width--;
+		}
+	}
+	else
+	{
+		while (token->precision > 0)
+		{
+			rst += write(1, "0", 1);
+			token->precision--;
+		}
+	}
+	return (rst);
+}

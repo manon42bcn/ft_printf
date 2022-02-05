@@ -1,8 +1,8 @@
 
 #include <stdio.h>
 #include "includes/ft_printf.h"
-#include "srcs/ft_printf.c"
 #include "srcs/ft_printf_input.c"
+#include "srcs/ft_printf.c"
 #include "srcs/ft_token_hexa.c"
 #include "srcs/ft_token_numbers.c"
 #include "srcs/ft_token_strings.c"
@@ -32,7 +32,8 @@ int main(void)
 
 	char *c;
 
-   printf("[%05.0i]", 5);
+  	//ft_printf("[%000000.5d]", 0);
+  	printf("[%0000005d]", 0);
 	 //write(1, c, 5);
 	//ft_printf("%c - %s - %p %d - %i - %u - %x %X %%", 'a', "test", (void *)0xdeadc0de, 20, -20, -1, -1, 200000000);
 	

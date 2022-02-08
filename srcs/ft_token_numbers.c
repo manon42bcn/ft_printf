@@ -6,81 +6,87 @@
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 14:15:45 by mporras-          #+#    #+#             */
-/*   Updated: 2022/02/01 14:15:47 by mporras-         ###   ########.fr       */
+/*   Updated: 2022/02/08 22:50:01 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static int	ft_print_format_number(t_token *token, char num)
-{
-	int	rst;
-
-	rst = 0;
-	if (token->point == 1 && token->precision > 0)
-		token->width = token->width - token->precision;
-	if (token->sign == -1 && token->fill_c != ' ')
-		rst += write(1, "-", 1);
-	if (token->sign == 1 && token->fill_c != ' ')
-		rst += write(1, "+", 1);
-	rst += ft_width_fill(token, 0);
-	if (token->sign == -1 && token->fill_c == ' ')
-		rst += write(1, "-", 1);
-	if (token->sign == 1 && token->fill_c == ' ')
-		rst += write(1, "+", 1);
-	rst += ft_width_fill(token, 1);
-	if (token->space == 1)
-		rst += write(1, " ", 1);
-	if (num != 0)
-		rst += write(1, &num, 1);
-	return (rst);
-}
-
-static int	ft_print_int(long int nbr, t_token *token)
+static int	ft_print_int(long int nbr, char sign)
 {
 	char	c;
 
+	if (nbr < 0)
+	{
+		nbr = nbr * -1;
+		sign = '-';
+	}
 	c = (nbr % 10) + '0';
-	token->precision--;
-	token->width--;
 	if (nbr >= 10)
-		return (ft_print_int(nbr / 10, token)
+		return (ft_print_int(nbr / 10, sign)
 			+ write(1, &c, 1));
 	else
-		return (ft_print_format_number(token, c));
-}
-
-static int	ft_print_number_cases(long int nbr, t_token *token)
-{
-	if (nbr == 0 && token->point == 1)
 	{
-		token->fill_c = ' ';
-		return (ft_print_format_number(token, 0));
-	}
-	else
-	{
-		if (nbr > 0 && token->sign == 1)
-			token->width--;
-		if (nbr < 0)
-		{
-			token->sign = -1;
-			token->space = 0;
-			token->width--;
-			nbr = nbr * -1;
-		}
-		return (ft_print_int(nbr, token));
+		if (sign == '-')
+			return (write(1, &sign, 1) + write(1, &c, 1));
+		else
+			return (write(1, &c, 1));
 	}
 }
 
-int	ft_process_numbers(va_list args, t_token *token)
+int	ft_process_numbers(va_list args, char token)
 {
 	int	rst;
 
 	rst = 0;
-	if (token->token == 'i' || token->token == 'd')
-		rst += ft_print_number_cases((long int)(va_arg(args, int)), token);
-	if (token->token == 'u')
-		rst += ft_print_number_cases((long int)
-				(va_arg(args, unsigned int)), token);
-	return (rst + ft_fill_left(token));
+	if (token == 'i' || token == 'd')
+		rst += ft_print_int((long int)(va_arg(args, int)), 0);
+	if (token == 'u')
+		rst += ft_print_int((long int)
+				(va_arg(args, unsigned int)), 0);
+	return (rst);
+}
+
+static int	ft_print_hexa(unsigned long nbr, char *base, char token)
+{
+	unsigned long	base_num;
+
+	base_num = 16;
+	if (nbr >= base_num)
+		return (ft_print_hexa(nbr / base_num, base, token)
+			+ write(1, &base[nbr % base_num], 1));
+	else
+	{
+		if (token == 'p')
+			return (write(1, &base[16], 1)
+				+ write(1, &base[17], 1)
+				+ write(1, &base[nbr % base_num], 1));
+		else
+			return (write(1, &base[nbr % base_num], 1));
+	}
+}
+
+static int	ft_print_hexa_cases(unsigned long nbr, char *base, char token)
+{
+	if (nbr == 0 && token != 'p')
+		return (write(1, "0", 1));
+	else
+		return (ft_print_hexa(nbr, base, token));
+}
+
+int	ft_process_hexa(va_list args, char token)
+{
+	int	rst;
+
+	rst = 0;
+	if (token == 'p')
+		rst += ft_print_hexa_cases(va_arg(args, unsigned long),
+				"0123456789abcdef0x", token);
+	else if (token == 'x')
+		rst = ft_print_hexa_cases(va_arg(args, unsigned int),
+				"0123456789abcdef0x", token);
+	else if (token == 'X')
+		rst = ft_print_hexa_cases(va_arg(args, unsigned int),
+				"0123456789ABCDEF0X", token);
+	return (rst);
 }

@@ -33,11 +33,3 @@ int	ft_is_width_flag(int c)
 {
 	return (c == ' ' || c == '0' || c == '-');
 }
-
-int	ft_is_int(int c)
-{
-	if (c >= 48 && c <= 57)
-		return (c - 48);
-	else
-		return (-1);
-}

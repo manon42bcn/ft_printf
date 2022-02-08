@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/01 10:59:56 by mporras-          #+#    #+#             */
-/*   Updated: 2022/02/01 11:00:04 by mporras-         ###   ########.fr       */
+/*   Created: 2022/01/11 13:10:38 by mporras-          #+#    #+#             */
+/*   Updated: 2022/01/11 13:10:44 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include "../libft/libft.h"
+#include "libft.h"
 
-int		ft_printf(const char *src, ...);
-int		ft_process_hexa(va_list args, char token);
-int		ft_process_numbers(va_list args, char token);
-int		ft_process_strings(va_list args, char token);
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	char	*rst;
+	size_t	len;
+	size_t	i;
 
-#endif
+	i = 0;
+	if (s == NULL)
+		return (NULL);
+	len = ft_strlen(s);
+	rst = (char *)malloc(sizeof(char) * (len + 1));
+	if (rst == NULL)
+		return (NULL);
+	while (s[i])
+	{
+		rst[i] = (*f)(i, s[i]);
+		i++;
+	}
+	rst[i] = 0;
+	return (rst);
+}

@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/01 10:59:56 by mporras-          #+#    #+#             */
-/*   Updated: 2022/02/01 11:00:04 by mporras-         ###   ########.fr       */
+/*   Created: 2022/01/11 14:21:50 by mporras-          #+#    #+#             */
+/*   Updated: 2022/01/19 21:27:07 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include "../libft/libft.h"
+#include "libft.h"
 
-int		ft_printf(const char *src, ...);
-int		ft_process_hexa(va_list args, char token);
-int		ft_process_numbers(va_list args, char token);
-int		ft_process_strings(va_list args, char token);
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*elem;
 
-#endif
+	if (lst)
+	{
+		while (*lst)
+		{
+			elem = (*lst)->next;
+			ft_lstdelone(*lst, del);
+			(*lst) = elem;
+		}
+	}
+}

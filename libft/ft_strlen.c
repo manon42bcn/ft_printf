@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/01 10:59:56 by mporras-          #+#    #+#             */
-/*   Updated: 2022/02/01 11:00:04 by mporras-         ###   ########.fr       */
+/*   Created: 2022/01/10 13:30:45 by mporras-          #+#    #+#             */
+/*   Updated: 2022/01/10 13:30:51 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include "../libft/libft.h"
+#include "libft.h"
 
-int		ft_printf(const char *src, ...);
-int		ft_process_hexa(va_list args, char token);
-int		ft_process_numbers(va_list args, char token);
-int		ft_process_strings(va_list args, char token);
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}

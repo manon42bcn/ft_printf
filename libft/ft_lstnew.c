@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/01 10:59:56 by mporras-          #+#    #+#             */
-/*   Updated: 2022/02/01 11:00:04 by mporras-         ###   ########.fr       */
+/*   Created: 2022/01/11 13:57:11 by mporras-          #+#    #+#             */
+/*   Updated: 2022/01/19 21:28:53 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include "../libft/libft.h"
+#include "libft.h"
 
-int		ft_printf(const char *src, ...);
-int		ft_process_hexa(va_list args, char token);
-int		ft_process_numbers(va_list args, char token);
-int		ft_process_strings(va_list args, char token);
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*elem;
 
-#endif
+	elem = (t_list *)malloc(sizeof(t_list));
+	if (elem == NULL)
+		return (NULL);
+	else
+	{
+		elem->content = content;
+		elem->next = NULL;
+	}
+	return (elem);
+}

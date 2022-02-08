@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mporras- <manon42bcn@yahoo.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/01 10:59:56 by mporras-          #+#    #+#             */
-/*   Updated: 2022/02/01 11:00:04 by mporras-         ###   ########.fr       */
+/*   Created: 2022/02/01 10:56:04 by mporras-          #+#    #+#             */
+/*   Updated: 2022/02/08 22:48:33 by mporras-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include "../libft/libft.h"
+#include "../includes/ft_printf_bonus.h"
 
-int		ft_printf(const char *src, ...);
-int		ft_process_hexa(va_list args, char token);
-int		ft_process_numbers(va_list args, char token);
-int		ft_process_strings(va_list args, char token);
+int	ft_printf(const char *src, ...)
+{
+	va_list	args;
+	int		i;
+	int		rst;
 
-#endif
+	i = 0;
+	rst = 0;
+	va_start(args, src);
+	while (src[i])
+	{
+		if (src[i] == '%' && src[i + 1])
+		{
+			i++;
+			rst += ft_input_to_tokens(&src[i], args, &i);
+			continue ;
+		}
+		if (!src[i])
+			break ;
+		rst += write(1, &src[i], 1);
+		i++;
+	}
+	va_end(args);
+	return (rst);
+}

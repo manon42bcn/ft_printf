@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf_bonus.h"
 
-int	ft_printf(const char *src, ...)
+int	ft_printf(const char *s, ...)
 {
 	va_list	args;
 	int		i;
@@ -20,18 +20,18 @@ int	ft_printf(const char *src, ...)
 
 	i = 0;
 	rst = 0;
-	va_start(args, src);
-	while (src[i])
+	va_start(args, s);
+	while (s[i])
 	{
-		if (src[i] == '%' && src[i + 1])
+		if (s[i] == '%' && s[i + 1])
 		{
 			i++;
-			rst += ft_input_to_tokens(&src[i], args, &i);
+			rst += ft_input_to_tokens(&s[i], args, &i);
 			continue ;
 		}
-		if (!src[i])
+		if (!s[i])
 			break ;
-		rst += write(1, &src[i], 1);
+		rst += write(1, &s[i], 1);
 		i++;
 	}
 	va_end(args);

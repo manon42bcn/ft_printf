@@ -47,16 +47,6 @@ int	ft_fill_left(t_token *token)
 	return (rst);
 }
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
 int	ft_width_fill(t_token *token, int l_r)
 {
 	int	rst;

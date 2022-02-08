@@ -1,6 +1,7 @@
 
 #include <stdio.h>
-#include "includes/ft_printf.h"
+#include <limits.h>
+#include "includes/ft_printf_bonus.h"
 
 /*
 int	ft_print_int_test(float nbr)
@@ -22,12 +23,13 @@ int	ft_print_int_test(float nbr)
 int main(void)
 {
 	char ptr;
-	int test;
 
 	char *c;
-	ft_printf("strlen %d\n", ft_strlen("Hola Manuel"));
-  	//ft_printf("[%000000.5d]", 0);
-  	ft_printf("[%0000005d]", 0);
+	int test;
+	test = ft_printf("[%#x %#x %#x %#x %#x %#x %#x]\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+	ft_printf("rst ft: %i\n", test);
+	test = printf("[%#x %#x %#x %#x %#x %#x %#x]\n", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42);
+	ft_printf("rst pf: %i\n", test);
 	 //write(1, c, 5);
 	//ft_printf("%c - %s - %p %d - %i - %u - %x %X %%", 'a', "test", (void *)0xdeadc0de, 20, -20, -1, -1, 200000000);
 	

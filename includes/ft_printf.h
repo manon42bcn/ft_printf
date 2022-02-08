@@ -17,7 +17,7 @@
 # include <stdarg.h>
 # include "../libft/libft.h"
 
-int		ft_printf(const char *src, ...);
+int		ft_printf(const char *s, ...);
 int		ft_process_hexa(va_list args, char token);
 int		ft_process_numbers(va_list args, char token);
 int		ft_process_strings(va_list args, char token);

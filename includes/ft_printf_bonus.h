@@ -31,7 +31,7 @@ typedef struct s_token
 
 }	t_token;
 
-int		ft_printf(const char *src, ...);
+int		ft_printf(const char *s, ...);
 int		ft_process_tokens(t_token *token, va_list args);
 void	ft_fix_flags_conditions(t_token	*token);
 int		ft_get_token_sizes(const char *input, t_token *token);

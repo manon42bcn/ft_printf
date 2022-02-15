@@ -39,7 +39,6 @@ $(NAME): $(OBJS)
 	$(MAKE) bonus -C ./libft
 	cp libft/libft.a $(NAME)
 	ar	rcs	$(NAME)	$(OBJS)
-	ranlib $(NAME)
 
 $(OBJS): $(SRCS)
 	$(CC) $(CFLAGS) $(INCLUDES) $(SRCS)
@@ -48,7 +47,6 @@ bonus: $(BONUS_OBJS)
 	$(MAKE) bonus -C ./libft
 	cp libft/libft.a $(NAME)
 	ar	rcs	$(NAME)	$(BONUS_OBJS)
-	ranlib $(NAME)
 
 $(BONUS_OBJS): $(BONUS_SRCS)
 	$(CC) $(CFLAGS) $(INCLUDES_BNS) $(BONUS_SRCS)

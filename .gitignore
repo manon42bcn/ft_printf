@@ -4,3 +4,4 @@
 estudio/
 *.out
 tester/
+.gitignore

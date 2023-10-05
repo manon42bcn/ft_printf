@@ -12,6 +12,16 @@
 
 #include "../includes/ft_printf_bonus.h"
 
+/**
+ * @brief Initializes a new t_token structure with default values.
+ *
+ * This function allocates memory for a new t_token structure and sets
+ * all its attributes to default values, ensuring it's ready to be used
+ * in the parsing process.
+ *
+ * @return Returns a pointer to the initialized t_token structure.
+ *         Returns NULL if memory allocation fails.
+ */
 t_token	*ft_start_token(void)
 {
 	t_token	*rst;
@@ -31,6 +41,15 @@ t_token	*ft_start_token(void)
 	return (rst);
 }
 
+/**
+ * @brief Prints spaces to the left based on the token's width.
+ *
+ * If the left flag is set in the token, this function will print
+ * spaces to fill the width specified.
+ *
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @return Returns the number of characters printed.
+ */
 int	ft_fill_left(t_token *token)
 {
 	int	rst;
@@ -47,6 +66,18 @@ int	ft_fill_left(t_token *token)
 	return (rst);
 }
 
+/**
+ * @brief Prints padding characters based on the token's flags.
+ *
+ * Depending on the token's flags and attributes, this function prints
+ * padding characters either for width or precision.
+ * The `l_r` parameter determines whether it's filling for width (0)
+ * or precision (1).
+ *
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @param l_r Integer determining whether to fill for width (0) or precision (1).
+ * @return Returns the number of characters printed.
+ */
 int	ft_width_fill(t_token *token, int l_r)
 {
 	int	rst;

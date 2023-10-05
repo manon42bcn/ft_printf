@@ -12,6 +12,17 @@
 
 #include "../includes/ft_printf.h"
 
+/**
+ * @brief Prints an integer number to the standard output.
+ *
+ * This function recursively prints an integer number to the standard output.
+ * Negative numbers are also handled and printed with a minus sign.
+ *
+ * @param nbr The integer number to be printed.
+ * @param sign Char to denote the sign of the number, '-' for negative,
+ * 0 for positive.
+ * @return Returns the number of characters printed.
+ */
 static int	ft_print_int(long int nbr, char sign)
 {
 	char	c;
@@ -34,6 +45,16 @@ static int	ft_print_int(long int nbr, char sign)
 	}
 }
 
+/**
+ * @brief Processes and prints the integer data types for printf.
+ *
+ * This function handles and prints the integer type tokens (i, d, u)
+ * based on the passed token and the data from the variable argument list.
+ *
+ * @param args The variable argument list containing the data.
+ * @param token The token character representing the data type.
+ * @return Returns the number of characters printed.
+ */
 int	ft_process_numbers(va_list args, char token)
 {
 	int	rst;
@@ -47,6 +68,18 @@ int	ft_process_numbers(va_list args, char token)
 	return (rst);
 }
 
+/**
+ * @brief Prints a hexadecimal representation of a number to the standard output.
+ *
+ * This function recursively prints a hexadecimal representation of the number.
+ * It can handle both lower and upper case hex representations, and pointer
+ * addresses.
+ *
+ * @param nbr The number to be printed in hexadecimal.
+ * @param base The base characters for hexadecimal representation.
+ * @param token The token character representing the data type or format.
+ * @return Returns the number of characters printed.
+ */
 static int	ft_print_hexa(unsigned long nbr, char *base, char token)
 {
 	unsigned long	base_num;
@@ -66,6 +99,18 @@ static int	ft_print_hexa(unsigned long nbr, char *base, char token)
 	}
 }
 
+/**
+ * @brief Handles special case for printing zero in hexadecimal format.
+ *
+ * This function checks if the number is zero, and handles the special
+ * printing case for it. Otherwise, it proceeds to print the number in
+ * its respective hexadecimal format.
+ *
+ * @param nbr The number to be printed in hexadecimal.
+ * @param base The base characters for hexadecimal representation.
+ * @param token The token character representing the data type or format.
+ * @return Returns the number of characters printed.
+ */
 static int	ft_print_hexa_cases(unsigned long nbr, char *base, char token)
 {
 	if (nbr == 0 && token != 'p')
@@ -74,6 +119,16 @@ static int	ft_print_hexa_cases(unsigned long nbr, char *base, char token)
 		return (ft_print_hexa(nbr, base, token));
 }
 
+/**
+ * @brief Processes and prints the hexadecimal data types for printf.
+ *
+ * This function handles and prints the hexadecimal type tokens (p, x, X)
+ * based on the passed token and the data from the variable argument list.
+ *
+ * @param args The variable argument list containing the data.
+ * @param token The token character representing the data type.
+ * @return Returns the number of characters printed.
+ */
 int	ft_process_hexa(va_list args, char token)
 {
 	int	rst;

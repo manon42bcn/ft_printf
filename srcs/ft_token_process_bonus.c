@@ -12,6 +12,16 @@
 
 #include "../includes/ft_printf_bonus.h"
 
+/**
+ * @brief Process the given token and print the corresponding formatted output.
+ *
+ * Based on the provided token, the appropriate formatting function is called
+ * to handle and print the data from the variable argument list.
+ *
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @param args The variable argument list containing the data.
+ * @return Returns the number of characters printed.
+ */
 int	ft_process_tokens(t_token *token, va_list args)
 {
 	int	rst;
@@ -26,6 +36,14 @@ int	ft_process_tokens(t_token *token, va_list args)
 	return (rst);
 }
 
+/**
+ * @brief Adjusts the flags of a given token based on specific conditions.
+ *
+ * Sets or modifies the flags of a token to match specific conditions and
+ * formatting requirements of the printf function.
+ *
+ * @param token Pointer to a structure holding token and its associated flags.
+ */
 void	ft_fix_flags_conditions(t_token	*token)
 {
 	if (token->fill_c == ' ' && token->width == 0)
@@ -34,10 +52,20 @@ void	ft_fix_flags_conditions(t_token	*token)
 		token->fill_c = ' ';
 	if (token->token == 'p')
 		token->hash = 1;
-	if ((token->token == 'x' || token->token == 'x') && token->fill_c == 0)
+	if ((token->token == 'x' || token->token == 'X') && token->fill_c == 0)
 		token->fill_c = '0';
 }
 
+/**
+ * @brief Determines the sizes associated with width and precision flags.
+ *
+ * Computes the sizes for width and precision based on the format string and
+ * updates the token's attributes accordingly.
+ *
+ * @param input Pointer to the current position in the format string.
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @return Returns the number of characters parsed in the input.
+ */
 int	ft_get_token_sizes(const char *input, t_token *token)
 {
 	int	i;
@@ -58,6 +86,16 @@ int	ft_get_token_sizes(const char *input, t_token *token)
 	return (i);
 }
 
+/**
+ * @brief Extracts and sets flags and attributes for a given token.
+ *
+ * Processes the format string to set flags and attributes for a token,
+ * based on recognized characters and sequences.
+ *
+ * @param input Pointer to the current position in the format string.
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @return Returns the number of characters parsed in the input.
+ */
 int	ft_get_tokens(const char *input, t_token *token)
 {
 	int		k;
@@ -87,6 +125,18 @@ int	ft_get_tokens(const char *input, t_token *token)
 	return (k);
 }
 
+/**
+ * @brief Converts the input characters into valid tokens and processes them.
+ *
+ * This function first checks if the input character is a valid token or flag.
+ * If valid, the character or sequence is processed and the data is printed.
+ *
+ * @param input Pointer to the current position in the format string.
+ * @param args The variable argument list containing the data.
+ * @param i Pointer to an integer that indicates the current position in
+ *          the input string.
+ * @return Returns the number of characters printed.
+ */
 int	ft_input_to_tokens(const char *input, va_list args, int *i)
 {
 	t_token	*token;

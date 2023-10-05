@@ -12,6 +12,18 @@
 
 #include "../includes/ft_printf_bonus.h"
 
+/**
+ * @brief Custom printf function to format and print data.
+ *
+ * This function takes a format string and a variable number of arguments.
+ * It processes the format string, identifies tokens and prints the
+ * corresponding formatted output for each token. It also handles
+ * any regular characters in the format string.
+ *
+ * @param s The format string containing text and tokens.
+ * @param ... Variable number of arguments corresponding to the tokens.
+ * @return Returns the total number of characters printed.
+ */
 int	ft_printf(const char *s, ...)
 {
 	va_list	args;

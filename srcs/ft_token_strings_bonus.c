@@ -12,6 +12,16 @@
 
 #include "../includes/ft_printf_bonus.h"
 
+/**
+ * @brief Determines the length of the string to be printed.
+ *
+ * Depending on the token's flags and the string's length, this function
+ * decides the length of the string that will be printed.
+ *
+ * @param str The string to be printed.
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @return Returns the number of characters to be printed.
+ */
 static int	ft_len_to_print(char *str, t_token *token)
 {
 	int	len;
@@ -25,6 +35,16 @@ static int	ft_len_to_print(char *str, t_token *token)
 		return (len);
 }
 
+/**
+ * @brief Formats and prints a string.
+ *
+ * This function takes into account various flags set in the token,
+ * such as width, and prints the string accordingly.
+ *
+ * @param str The string to be printed.
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @return Returns the number of characters printed.
+ */
 static int	ft_print_strings(char *str, t_token *token)
 {
 	int		len;
@@ -47,6 +67,16 @@ static int	ft_print_strings(char *str, t_token *token)
 	return (rst);
 }
 
+/**
+ * @brief Formats and prints a character.
+ *
+ * Depending on the token's flags, such as width, this function formats and
+ * prints the given character accordingly.
+ *
+ * @param c The character to be printed.
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @return Returns the number of characters printed.
+ */
 static int	ft_print_chars(int c, t_token *token)
 {
 	int		fill;
@@ -65,6 +95,16 @@ static int	ft_print_chars(int c, t_token *token)
 	return (rst);
 }
 
+/**
+ * @brief Processes and prints a string or character based on the token.
+ *
+ * This function identifies the type of string format (c, %, s) and calls
+ * the appropriate printing functions.
+ *
+ * @param args The variable argument list containing the data.
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @return Returns the number of characters printed.
+ */
 int	ft_process_strings(va_list args, t_token *token)
 {
 	int	rst;

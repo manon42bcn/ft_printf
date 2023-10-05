@@ -12,6 +12,18 @@
 
 #include "../includes/ft_printf_bonus.h"
 
+/**
+ * @brief Formats and prints a hexadecimal character.
+ *
+ * This function takes into account various flags set in the token, such as
+ * width, precision, and the hash flag, and prints the hexadecimal character
+ * accordingly.
+ *
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @param base String representing the characters used in hexa representation.
+ * @param num The hexadecimal character to be printed.
+ * @return Returns the number of characters printed.
+ */
 static int	ft_print_format_hexa(t_token *token, char *base, char num)
 {
 	int	rst;
@@ -34,6 +46,17 @@ static int	ft_print_format_hexa(t_token *token, char *base, char num)
 	return (rst);
 }
 
+/**
+ * @brief Recursive function to print a number in hexadecimal format.
+ *
+ * This function breaks down the number into its individual hexa characters
+ * and prints them, taking the token's flags into consideration.
+ *
+ * @param nbr The number to be printed in hexadecimal format.
+ * @param base String representing the characters used in hexa representation.
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @return Returns the number of characters printed.
+ */
 static int	ft_print_hexa(unsigned long nbr, char *base, t_token *token)
 {
 	unsigned long	base_num;
@@ -48,6 +71,17 @@ static int	ft_print_hexa(unsigned long nbr, char *base, t_token *token)
 		return (ft_print_format_hexa(token, base, base[nbr]));
 }
 
+/**
+ * @brief Determines how to print the hexadecimal based on the token and value.
+ *
+ * Depending on the token's flags and the value to be printed, this function
+ * decides the appropriate format and calls the necessary functions.
+ *
+ * @param nbr The number to be printed.
+ * @param base String representing the characters used in hexa representation.
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @return Returns the number of characters printed.
+ */
 static int	ft_print_hexa_cases(unsigned long nbr, char *base, t_token *token)
 {
 	if (token->token != 'p' && nbr == 0 && token->hash == 1)
@@ -58,6 +92,16 @@ static int	ft_print_hexa_cases(unsigned long nbr, char *base, t_token *token)
 		return (ft_print_hexa(nbr, base, token));
 }
 
+/**
+ * @brief Processes and prints hexadecimal format based on the given token.
+ *
+ * This function identifies the type of hexadecimal format (p, x, X) and calls
+ * the appropriate printing functions.
+ *
+ * @param args The variable argument list containing the data.
+ * @param token Pointer to a structure holding token and its associated flags.
+ * @return Returns the number of characters printed.
+ */
 int	ft_process_hexa(va_list args, t_token *token)
 {
 	int	rst;

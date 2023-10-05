@@ -17,6 +17,40 @@
 # include <stdarg.h>
 # include "../libft/libft.h"
 
+/**
+ * @struct t_token
+ * @brief Represents a format token and its properties for ft_printf.
+ *
+ * This struct encapsulates properties and flags of a format specifier
+ * used in the custom printf function. It aids in output formatting.
+ *
+ * @var t_token::token
+ * Character for the format specifier (e.g., 'd', 's', 'x', etc.).
+ *
+ * @var t_token::fill_c
+ * Character for padding, either space (' ') or zero ('0').
+ *
+ * @var t_token::width
+ * Minimum width of the field. Padded with fill_c if value is shorter.
+ *
+ * @var t_token::hash
+ * Flag for '#' specifier for an alternative form.
+ *
+ * @var t_token::sign
+ * Specifies the sign: positive (+1), negative (-1), or neutral (0).
+ *
+ * @var t_token::left
+ * Flag for left-justification with '-' specifier.
+ *
+ * @var t_token::point
+ * Indicates presence of '.' to specify precision.
+ *
+ * @var t_token::precision
+ * Number of digits after the decimal for floats or limit for strings.
+ *
+ * @var t_token::space
+ * Flag for space insertion before value when there's no sign.
+ */
 typedef struct s_token
 {
 	int	token;

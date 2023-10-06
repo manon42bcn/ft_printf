@@ -227,3 +227,40 @@ Keep in mind that some flags overlap its behaviour. That can be a little tricky.
 - **Memory Leaks**: Given the usage of dynamic memory allocation, it's vital to check for memory leaks. Tools like `valgrind` can be helpful.
 - **Edge Cases**: Test with maximum and minimum possible values for data types. Also, check the behavior when using multiple flags together.
 - **Compatibility**: Ensure that the output of the bonus `ft_printf` matches the output of the system's `printf` function for similar inputs.
+
+## Generating Documentation with Doxygen
+
+To generate detailed, and more friendly documentation for this project, follow the steps outlined below:
+
+### 1. Install Doxygen:
+
+If you haven't already installed Doxygen, you can do so using your system's package manager.
+
+* Debian/Ubuntu-based systems:
+
+```bash
+sudo apt-get install doxygen
+```
+
+* On macOS:
+
+```bash
+brew install doxygen
+```
+
+### 2. Generate the Documentation:
+
+From the root directory of the project, where the `Doxyfile` is located, run:
+
+```bash
+doxygen Doxyfile
+```
+
+### 3. View the Documentation:
+
+Once Doxygen completes the documentation generation, you can view it by opening the `html/index.html` file in your preferred web browser:
+
+```bash
+open docs/html/index.html   # On macOS
+xdg-open docs/html/index.html   # On Linux systems
+```

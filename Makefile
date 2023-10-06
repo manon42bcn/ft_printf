@@ -10,46 +10,70 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		 = libftprintf.a
-SRC_DIR		 = srcs
-SRCS_FILES	 = ft_printf.c \
-			   ft_token_numbers.c \
-			   ft_token_strings.c \
-			   ft_token_process.c
-BONUS_FILES	 = ft_printf_bonus.c \
-			   ft_printf_input_bonus.c \
-			   ft_printf_utils_bonus.c \
-			   ft_token_hexa_bonus.c \
-			   ft_token_numbers_bonus.c \
-			   ft_token_process_bonus.c \
-			   ft_token_strings_bonus.c
-BONUS_SRCS	 = $(addprefix $(SRC_DIR)/,$(BONUS_FILES))
-BONUS_OBJS	 = $(BONUS_FILES:.c=.o)
-SRCS 		 = $(addprefix $(SRC_DIR)/,$(SRCS_FILES))
-OBJS		 = $(SRCS_FILES:.c=.o)
-CC			 = gcc
-RM			 = rm	-f
-CFLAGS		 = -Wall -Wextra -Werror -c
-INCLUDES	 = -I.	includes/ft_printf.h
-INCLUDES_BNS = -I.	includes/ft_printf_bonus.h
+NAME			=	libftprintf.a
+MANDATORY		=	mandatory
+SRC_DIR			=	mandatory
+OBJS_DIR		=	mandatory/obj
+OBJS_SUBS		=	$(OBJS_DIR)
+SRCS			=	ft_printf.c \
+				 	ft_token_numbers.c \
+				 	ft_token_strings.c \
+				 	ft_token_process.c
+OBJS 			=	$(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+SRC_DIR_BONUS 	= 	bonus
+OBJS_DIR_BONUS	= 	bonus/obj
+SRCS_BONUS	 	= 	ft_printf_bonus.c \
+			 	  	ft_printf_input_bonus.c \
+			 	  	ft_printf_utils_bonus.c \
+			 	  	ft_token_hexa_bonus.c \
+			 	  	ft_token_numbers_bonus.c \
+			 	  	ft_token_process_bonus.c \
+			 	  	ft_token_strings_bonus.c
+OBJS_BONUS		=	$(addprefix $(OBJS_DIR_BONUS)/,$(SRCS_BONUS:.c=.o))
+CC			 	= 	gcc
+RM			 	= 	rm	-rf
+CFLAGS		 	= 	-Wall -Wextra -Werror -c
+INCLUDES	 	= 	-I.	mandatory/inc/ft_printf.h
+INCLUDES_BNS 	= 	-I.	includes/ft_printf_bonus.h
+BONUS_FLAG		=	.bonus
 
-all: $(NAME)
- 
-$(NAME): $(OBJS)
+all: version $(NAME)
+
+version:
+	@if [ -f .bonus ]; then \
+  		rm $(BONUS_FLAG); \
+		$(MAKE) fclean; \
+		$(MAKE); \
+	fi
+
+$(NAME): $(OBJS_SUBS) $(OBJS)
 	$(MAKE) bonus -C ./libft
 	cp libft/libft.a $(NAME)
 	ar	rcs	$(NAME)	$(OBJS)
 
-$(OBJS): $(SRCS)
-	$(CC) $(CFLAGS) $(INCLUDES) $(SRCS)
+$(OBJS_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
+	$(CC) -Iinc $(CFLAGS) -g -c $< -o $@
 
-bonus: $(BONUS_OBJS)
+$(OBJS_DIR):
+	-@mkdir $(OBJS_DIR)
+
+bonus: version_bonus $(BONUS_FLAG)
 	$(MAKE) bonus -C ./libft
 	cp libft/libft.a $(NAME)
-	ar	rcs	$(NAME)	$(BONUS_OBJS)
+	ar	rcs	$(NAME)	$(OBJS_BONUS)
 
-$(BONUS_OBJS): $(BONUS_SRCS)
-	$(CC) $(CFLAGS) $(INCLUDES_BNS) $(BONUS_SRCS)
+version_bonus:
+	@if [ ! -f $(BONUS_FLAG) ] && [ -f $(NAME) ]; then \
+		$(MAKE) fclean; \
+    fi
+
+$(BONUS_FLAG): $(OBJS_DIR_BONUS) $(OBJS_BONUS)
+
+$(OBJS_DIR_BONUS)/%.o: $(SRC_DIR_BONUS)/%.c bonus/inc/ft_printf_bonus.h
+	$(CC) -Iinc $(CFLAGS) -g -c $< -o $@
+
+$(OBJS_DIR_BONUS):
+	-@mkdir $(OBJS_DIR_BONUS)
 
 clean:
 	$(MAKE) -C ./libft fclean
@@ -57,6 +81,8 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	@$(RM) $(OBJS_DIR)
+	@$(RM) $(OBJS_DIR_BONUS)
 
 re:	fclean $(NAME)
 

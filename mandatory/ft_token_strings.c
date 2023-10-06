@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "inc/ft_printf.h"
 
 /**
  * @brief Prints a string to the standard output.

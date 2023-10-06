@@ -39,6 +39,58 @@ This project is a good example of how different a task can be focused depending 
 
 Grade: 125%.
 
+### IMPORTANT
+
+This project uses libft (my last version) as submodule. So, there is a mini tutorial to work with them:
+
+## Working with Git Submodules
+
+### 1. **Clone the repository with submodules**
+
+When you clone the repository, make sure to use the `--recursive` flag to also clone the submodules:
+
+   ```bash
+   git clone --recursive [Repository URL]
+   ```
+
+If you've already cloned the repository but forgot to initialize the submodules:
+
+   ```bash
+   git submodule update --init
+   ```
+
+### 2. **Update submodules**
+
+After pulling changes with `git pull` or switching branches, the submodules might have been updated. Ensure they're synchronized:
+
+   ```bash
+   git submodule update --recursive
+   ```
+
+### 3. **Add a new submodule**
+
+If you wish to add a new submodule to the project:
+
+   ```bash
+   git submodule add [Submodule URL] [path/to/submodule]
+   ```
+
+Then, commit the changes to include the new submodule in the project.
+
+### 4. **Remove a submodule**
+
+Removing a submodule involves several steps:
+
+- Delete the relevant entry from the `.gitmodules` file.
+- Run `git add .gitmodules`.
+- Delete the relevant entry from `.git/config`.
+- Run `git rm --cached [path/to/submodule]` (without trailing slash).
+- Delete the relevant directory within `.git/modules`.
+- Commit the changes.
+
+
+#### WARNING: I haven't check my Makefile to work 100% with my new version of libft.
+
 ## Prototype
 
 ```c
@@ -157,6 +209,8 @@ Always ensure that during testing, proper error handling mechanisms are in place
    - `0` (Zero): Pads the result with leading zeros.
    - ` ` (Space): Inserts a space before the result.
    - `-` (Minus): Left-justifies the result.
+
+Keep in mind that some flags overlap its behaviour. That can be a little tricky.
 
 ### Advanced Token Parsing
 - The bonus version of `ft_printf` is more robust in its parsing of format specifiers. It can recognize a wider range of tokens and flags, making it more versatile and closely aligned with the original `printf` function.

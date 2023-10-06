@@ -71,6 +71,7 @@ $(BONUS_FLAG): $(OBJS_DIR_BONUS) $(OBJS_BONUS)
 
 $(OBJS_DIR_BONUS)/%.o: $(SRC_DIR_BONUS)/%.c bonus/inc/ft_printf_bonus.h
 	$(CC) -Iinc $(CFLAGS) -g -c $< -o $@
+	@touch $(BONUS_FLAG)
 
 $(OBJS_DIR_BONUS):
 	-@mkdir $(OBJS_DIR_BONUS)
@@ -83,6 +84,7 @@ fclean: clean
 	$(RM) $(NAME)
 	@$(RM) $(OBJS_DIR)
 	@$(RM) $(OBJS_DIR_BONUS)
+	@$(RM) $(BONUS_FLAG)
 
 re:	fclean $(NAME)
 

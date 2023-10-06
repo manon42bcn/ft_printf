@@ -89,7 +89,9 @@ Removing a submodule involves several steps:
 - Commit the changes.
 
 
-#### WARNING: I haven't check my Makefile to work 100% with my new version of libft.
+#### WARNING:
+
+I haven't check my Makefile to work 100% with my new libft.
 
 ## Prototype
 

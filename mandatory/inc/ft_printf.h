@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include "../../libft/inc/libft.h"
+# include "libft.h"
 
 int		ft_printf(const char *s, ...);
 int		ft_process_hexa(va_list args, char token);

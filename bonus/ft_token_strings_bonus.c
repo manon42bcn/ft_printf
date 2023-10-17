@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf_bonus.h"
+#include "ft_printf_bonus.h"
 
 /**
  * @brief Determines the length of the string to be printed.

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf_bonus.h"
+#include "ft_printf_bonus.h"
 
 /**
  * @brief Initializes a new t_token structure with default values.

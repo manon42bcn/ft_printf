@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf_bonus.h"
+#include "ft_printf_bonus.h"
 
 /**
  * @brief Formats and prints a hexadecimal character.

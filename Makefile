@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME			=	libftprintf.a
+LIB_FT			=	libft/libft.a
 MANDATORY		=	mandatory
 SRC_DIR			=	mandatory
 OBJS_DIR		=	mandatory/obj
@@ -33,9 +34,9 @@ OBJS_BONUS		=	$(addprefix $(OBJS_DIR_BONUS)/,$(SRCS_BONUS:.c=.o))
 CC			 	= 	gcc
 RM			 	= 	rm	-rf
 CFLAGS		 	= 	-Wall -Wextra -Werror -c
-INCLUDES	 	= 	-I.	mandatory/inc/ft_printf.h
-INCLUDES_BNS 	= 	-I.	includes/ft_printf_bonus.h
-BONUS_FLAG		=	.bonus
+INCLUDES	 	= 	-Imandatory/inc -Ilibft/inc
+INCLUDES_BNS 	= 	-Ibonus/inc -Ilibft/inc
+BONUS_FLAG		=	.bns
 
 all: version $(NAME)
 
@@ -46,20 +47,16 @@ version:
 		$(MAKE); \
 	fi
 
-$(NAME): $(OBJS_SUBS) $(OBJS)
-	$(MAKE) bonus -C ./libft
-	cp libft/libft.a $(NAME)
+$(NAME): $(LIB_FT) $(OBJS_SUBS) $(OBJS)
 	ar	rcs	$(NAME)	$(OBJS)
 
-$(OBJS_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
-	$(CC) -Iinc $(CFLAGS) -g -c $< -o $@
+$(OBJS_DIR)/%.o: $(SRC_DIR)/%.c mandatory/inc/ft_printf.h
+	$(CC) $(INCLUDES) $(CFLAGS) -g -c $< -o $@
 
 $(OBJS_DIR):
 	-@mkdir $(OBJS_DIR)
 
-bonus: version_bonus $(BONUS_FLAG)
-	$(MAKE) bonus -C ./libft
-	cp libft/libft.a $(NAME)
+bonus: version_bonus $(LIB_FT) $(BONUS_FLAG)
 	ar	rcs	$(NAME)	$(OBJS_BONUS)
 
 version_bonus:
@@ -70,11 +67,15 @@ version_bonus:
 $(BONUS_FLAG): $(OBJS_DIR_BONUS) $(OBJS_BONUS)
 
 $(OBJS_DIR_BONUS)/%.o: $(SRC_DIR_BONUS)/%.c bonus/inc/ft_printf_bonus.h
-	$(CC) -Iinc $(CFLAGS) -g -c $< -o $@
+	$(CC) $(INCLUDES_BNS) $(CFLAGS) -g -c $< -o $@
 	@touch $(BONUS_FLAG)
 
 $(OBJS_DIR_BONUS):
 	-@mkdir $(OBJS_DIR_BONUS)
+
+$(LIB_FT):
+	$(MAKE) bonus -C ./libft
+	cp libft/libft.a $(NAME)
 
 clean:
 	$(MAKE) -C ./libft fclean

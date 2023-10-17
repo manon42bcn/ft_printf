@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include "../../libft/inc/libft.h"
+# include "libft.h"
 
 /**
  * @struct t_token

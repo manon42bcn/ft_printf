@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/ft_printf.h"
+#include "ft_printf.h"
 
 /**
  * @brief Prints an integer number to the standard output.
